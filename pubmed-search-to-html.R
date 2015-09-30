@@ -16,5 +16,32 @@ search.term = paste("Ingolia NT[AUTH] AND ",
 
 nti.pap = entrez_search(db = "pubmed",
                         term = search.term,
-                        retmax = 33)
+                        use_history = TRUE)
 
+# there's some ambiguity here, I think that because I've invoked use_history I will get the total 
+# list of ids, even if it at some point exceeds 20, but I'm not certain.
+nti.pap
+str(nti.pap)
+
+nti.pap.summ = entrez_summary(db = "pubmed",
+                              # id = nti.pap$ids,
+                              web_history = nti.pap$web_history)
+
+nti.pap.summ
+
+extract_from_esummary(nti.pap.summ, "authors", simplify = FALSE)$name
+
+
+
+
+
+paste("<div style="margin: 0 0 0.6em 0; text-indent: -2em; padding-left: 2em;">",
+      )
+
+
+<div style="margin: 0 0 0.6em 0; text-indent: -2em; padding-left: 2em;">
+Stern-Ginossar N, Weisburd B, Michalski A, Le VT, Hein
+MY, Huang SX, Ma M, Shen B, Qian SB, Hengel H, Mann M,
+Ingolia NT, Weissman JS. Decoding human
+cytomegalovirus. <i>Science</i> <b>338</b>: 1088 (2012).
+</div>
