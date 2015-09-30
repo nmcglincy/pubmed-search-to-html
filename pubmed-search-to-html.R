@@ -26,13 +26,16 @@ str(nti.pap)
 nti.pap.summ = entrez_summary(db = "pubmed",
                               # id = nti.pap$ids,
                               web_history = nti.pap$web_history)
+# Asks me to used either the $ids or the web_history, but not both.
 
 nti.pap.summ
 
-extract_from_esummary(nti.pap.summ, "authors", simplify = FALSE)$name
+foo = extract_from_esummary(nti.pap.summ, 
+                      c("authors", "fulljournalname", "volume", "pages", "pubdate"), 
+                      simplify = FALSE)
+str(foo)
 
-
-
+# this produces a list of lists
 
 
 paste("<div style="margin: 0 0 0.6em 0; text-indent: -2em; padding-left: 2em;">",
