@@ -26,7 +26,6 @@ foo = extract_from_esummary(nti.pap.summ,
                             c("authors", "title", "fulljournalname", "volume", "pages", "pubdate"), 
                             simplify = FALSE)
 header = '<div style="margin: 0 0 0.6em 0; text-indent: -2em; padding-left: 2em;">'
-
 for (i in 1:length(foo)) {
   cat(paste(header,
             "\n",
@@ -48,8 +47,5 @@ for (i in 1:length(foo)) {
       sep = "\n",
       append = TRUE)
 }
-
-
 # the format of the page numbers are so different, I feel like it's going to be easier to sort it
 # out manually, while I'm sorting the publication types.
-
