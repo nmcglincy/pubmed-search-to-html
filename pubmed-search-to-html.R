@@ -20,8 +20,8 @@ nti.pap = entrez_search(db = "pubmed",
 
 # there's some ambiguity here, I think that because I've invoked use_history I will get the total 
 # list of ids, even if it at some point exceeds 20, but I'm not certain.
-nti.pap
-str(nti.pap)
+# nti.pap
+# str(nti.pap)
 
 nti.pap.summ = entrez_summary(db = "pubmed",
                               # id = nti.pap$ids,
@@ -31,9 +31,42 @@ nti.pap.summ = entrez_summary(db = "pubmed",
 nti.pap.summ
 
 foo = extract_from_esummary(nti.pap.summ, 
-                      c("authors", "fulljournalname", "volume", "pages", "pubdate"), 
+                      c("authors", "title", "fulljournalname", "volume", "pages", "pubdate"), 
                       simplify = FALSE)
 str(foo)
+# paste(foo[[1]][[1]]$name, collapse = ", ")
+# lapply(foo, function(x){paste(x[[1]]$name, collapse = ", ")})
+# 
+# foo$authors
+
+header = '<div style="margin: 0 0 0.6em 0; text-indent: -2em; padding-left: 2em;"> '
+
+for (i in 1:length(foo)) {
+  print(paste(header,
+              paste(foo[[i]][[1]]$name, collapse = ", "),
+              ". ",
+              paste(foo[[i]][[2]]),
+              " <i>", paste(foo[[i]][[3]]), "</i> ",
+              "<b>", paste(foo[[i]][[4]]), "</b>: ",
+              paste(foo[[i]][[5]]),
+              " (", paste(foo[[i]][[6]]), "). </div>",
+              sep = ""))
+}
+
+
+library(plyr)
+library(dplyr)
+library(str)
+lapply(foo, ldply)
+
+bar = extract_from_esummary(nti.pap.summ,
+                            "authors",
+                            simplify = FALSE)
+str(bar)
+lapply(bar, function(x){paste(x[[1]]$name, collapse = ", ")})
+paste(bar[[1]][[1]]$name, collapse = ", ")
+
+ldply(bar, data.frame)
 
 # this produces a list of lists
 
