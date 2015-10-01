@@ -35,7 +35,20 @@ foo = extract_from_esummary(nti.pap.summ,
                       c("authors", "title", "fulljournalname", "volume", "pages", "pubdate"), 
                       simplify = FALSE)
 str(foo)
-
+header = '<div style="margin: 0 0 0.6em 0; text-indent: -2em; padding-left: 2em;">'
+for (i in 1:length(foo)) {
+  print(paste(header,
+              paste(foo[[i]][[1]]$name, collapse = ", "),
+              ". ",
+              paste(foo[[i]][[2]]),
+              " <i>",
+              paste(foo[[i]][[3]]),
+              "</i> ",
+              "<b>",
+              paste(foo[[i]][[4]])
+              "</b>: ",
+              sep = ""))
+}
 
 
 # this produces a list of lists
