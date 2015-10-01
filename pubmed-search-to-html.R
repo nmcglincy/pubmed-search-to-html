@@ -26,23 +26,30 @@ foo = extract_from_esummary(nti.pap.summ,
                             c("authors", "title", "fulljournalname", "volume", "pages", "pubdate"), 
                             simplify = FALSE)
 header = '<div style="margin: 0 0 0.6em 0; text-indent: -2em; padding-left: 2em;">'
+
 for (i in 1:length(foo)) {
-  print(paste(header,
-              paste(foo[[i]][[1]]$name, collapse = ", "),
-              ". ",
-              paste(foo[[i]][[2]]),
-              " <i>",
-              paste(foo[[i]][[3]]),
-              "</i> ",
-              "<b>",
-              paste(foo[[i]][[4]]),
-              "</b>: ",
-              paste(foo[[i]][[5]]),
-              " (",
-              str_sub(paste(foo[[i]][[6]]), 1, 4),
-              "). </div>",
-              sep = ""))
+  cat(paste(header,
+            "\n",
+            paste(foo[[i]][[1]]$name, collapse = ", "),
+            ". ",
+            paste(foo[[i]][[2]]),
+            " <i>",
+            paste(foo[[i]][[3]]),
+            "</i> ",
+            "<b>",
+            paste(foo[[i]][[4]]),
+            "</b>: ",
+            paste(foo[[i]][[5]]),
+            " (",
+            str_sub(paste(foo[[i]][[6]]), 1, 4),
+            ").\n</div>",
+            sep = ""),
+      file = "papers.txt",
+      sep = "\n",
+      append = TRUE)
 }
+
+
 # the format of the page numbers are so different, I feel like it's going to be easier to sort it
 # out manually, while I'm sorting the publication types.
 
