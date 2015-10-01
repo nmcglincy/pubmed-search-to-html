@@ -3,6 +3,7 @@
 # Make a pubmed search for out group's papers
 library(rentrez)
 library(lubridate)
+library(stringr)
 
 # Specifically, Nick's papers from a year to the present year
 from.year = 2013
@@ -20,8 +21,8 @@ nti.pap = entrez_search(db = "pubmed",
 
 # there's some ambiguity here, I think that because I've invoked use_history I will get the total 
 # list of ids, even if it at some point exceeds 20, but I'm not certain.
-nti.pap
-str(nti.pap)
+# nti.pap
+# str(nti.pap)
 
 nti.pap.summ = entrez_summary(db = "pubmed",
                               # id = nti.pap$ids,
@@ -31,9 +32,11 @@ nti.pap.summ = entrez_summary(db = "pubmed",
 nti.pap.summ
 
 foo = extract_from_esummary(nti.pap.summ, 
-                      c("authors", "fulljournalname", "volume", "pages", "pubdate"), 
+                      c("authors", "title", "fulljournalname", "volume", "pages", "pubdate"), 
                       simplify = FALSE)
 str(foo)
+
+
 
 # this produces a list of lists
 
