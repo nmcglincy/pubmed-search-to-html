@@ -40,7 +40,7 @@ str(foo)
 # foo$authors
 
 header = '<div style="margin: 0 0 0.6em 0; text-indent: -2em; padding-left: 2em;"> '
-
+library(stringr)
 for (i in 1:length(foo)) {
   print(paste(header,
               paste(foo[[i]][[1]]$name, collapse = ", "),
@@ -49,14 +49,19 @@ for (i in 1:length(foo)) {
               " <i>", paste(foo[[i]][[3]]), "</i> ",
               "<b>", paste(foo[[i]][[4]]), "</b>: ",
               paste(foo[[i]][[5]]),
-              " (", paste(foo[[i]][[6]]), "). </div>",
+              " (", str_sub(paste(foo[[i]][[6]]), 1, 4), "). </div>",
               sep = ""))
 }
+# Ok, dealing with the different formats of page no might be tricky, leave until later
+for (i in 1:length(foo)) {
+  print(paste(foo[[i]][[5]]))
+}
+
 
 
 library(plyr)
 library(dplyr)
-library(str)
+
 lapply(foo, ldply)
 
 bar = extract_from_esummary(nti.pap.summ,
