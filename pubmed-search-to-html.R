@@ -28,12 +28,12 @@ nti.pap.summ = entrez_summary(db = "pubmed",
                               web_history = nti.pap$web_history)
 # Asks me to used either the $ids or the web_history, but not both.
 
-nti.pap.summ
+# nti.pap.summ
 
 foo = extract_from_esummary(nti.pap.summ, 
                       c("authors", "title", "fulljournalname", "volume", "pages", "pubdate"), 
                       simplify = FALSE)
-str(foo)
+# str(foo)
 # paste(foo[[1]][[1]]$name, collapse = ", ")
 # lapply(foo, function(x){paste(x[[1]]$name, collapse = ", ")})
 # 
@@ -53,36 +53,36 @@ for (i in 1:length(foo)) {
               sep = ""))
 }
 # Ok, dealing with the different formats of page no might be tricky, leave until later
-for (i in 1:length(foo)) {
-  print(paste(foo[[i]][[5]]))
-}
-
-
-
-library(plyr)
-library(dplyr)
-
-lapply(foo, ldply)
-
-bar = extract_from_esummary(nti.pap.summ,
-                            "authors",
-                            simplify = FALSE)
-str(bar)
-lapply(bar, function(x){paste(x[[1]]$name, collapse = ", ")})
-paste(bar[[1]][[1]]$name, collapse = ", ")
-
-ldply(bar, data.frame)
-
-# this produces a list of lists
-
-
-paste("<div style="margin: 0 0 0.6em 0; text-indent: -2em; padding-left: 2em;">",
-      )
-
-
-<div style="margin: 0 0 0.6em 0; text-indent: -2em; padding-left: 2em;">
-Stern-Ginossar N, Weisburd B, Michalski A, Le VT, Hein
-MY, Huang SX, Ma M, Shen B, Qian SB, Hengel H, Mann M,
-Ingolia NT, Weissman JS. Decoding human
-cytomegalovirus. <i>Science</i> <b>338</b>: 1088 (2012).
-</div>
+# for (i in 1:length(foo)) {
+#   print(paste(foo[[i]][[5]]))
+# }
+#
+#
+#
+# library(plyr)
+# library(dplyr)
+#
+# lapply(foo, ldply)
+#
+# bar = extract_from_esummary(nti.pap.summ,
+#                             "authors",
+#                             simplify = FALSE)
+# str(bar)
+# lapply(bar, function(x){paste(x[[1]]$name, collapse = ", ")})
+# paste(bar[[1]][[1]]$name, collapse = ", ")
+#
+# ldply(bar, data.frame)
+#
+# # this produces a list of lists
+#
+#
+# paste("<div style="margin: 0 0 0.6em 0; text-indent: -2em; padding-left: 2em;">",
+#       )
+#
+#
+# <div style="margin: 0 0 0.6em 0; text-indent: -2em; padding-left: 2em;">
+# Stern-Ginossar N, Weisburd B, Michalski A, Le VT, Hein
+# MY, Huang SX, Ma M, Shen B, Qian SB, Hengel H, Mann M,
+# Ingolia NT, Weissman JS. Decoding human
+# cytomegalovirus. <i>Science</i> <b>338</b>: 1088 (2012).
+# </div>
